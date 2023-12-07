@@ -1,0 +1,42 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/Content/loginstyle.css" />
+    <title>Sign in & Sign up Form</title>
+</head>
+<body>
+    <div class="text-center" style="font-family:Poppins">
+        <div class="w3-container">
+            <br><br><div style="border: 1px solid black; border-radius: 10px 70px 10px 70px; border-width: 3px">
+                <p align="center">
+                    <br>
+                    <h3>This Is Your QrCode</h3>
+                    <h3>it is ready to be used</h3>
+                    <br>
+                </p>
+
+                <img src="@ViewBag.QRCodeImage" width="250px" height="250px" />
+                <br />
+                <a href="@ViewBag.QRCodeImage" download="QRcode" class="download-btn">
+                    Download
+                    <i class="fa-fad download"></i>
+
+                </a>
+            </div><br><br>
+        </div>
+    </div>
+
+
+
+    <a href="https://www.facebook.com"><img src="/Images/facbook.png" alt="HTML tutorial" style="width:42px;height:42px;"></a>
+    <a href="https://www.instagram.com"><img src="/Images/instagram.png" alt="HTML tutorial" style="width:42px;height:42px;"></a>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MafCode.Models.UserItem>
+
+@{
+    ViewBag.Title = "AddItem";
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemDescription)
+        </th>
+        <th>
+            ViewQr
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemDescription)
+        </td>
+        <td>
+            @Html.ActionLink("View QR", "UserQr", new { id = item.ItemID})
+        </td>
+        
+
+
+    </tr>
+}
+
+</table>
+<hr />
+<div>
+    <form>
+        <div class="form-group">
+            <label for="ItemName">Item Name</label>
+            <input type="text" class="form-control" id="ItemName" placeholder="Enter Item Name">
+        </div>
+        <div class="form-group">
+            <label for="ItemDescription">Description</label>
+            <input type="text" class="form-control" id="ItemDescription" placeholder="Enter Item Desciption">
+        </div>
+        <div class="form-group"><button onclick="AddItem()" type="button" class="btn btn-primary">Add Item</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    function AddItem() {
+        var UserID = '@ViewBag.UniqueID';
+            var data = {
+                ItemName: $('#ItemName').val(),
+                ItemDescription: $('#ItemDescription').val(),
+                UniqueID : '@ViewBag.UniqueID',
+            };
+        $.post('@Url.Action("AddItem", "UserInfo" , new { id = ViewBag.UniqueID })', data, function (data) {
+            location.reload(true);
+        });
+    }
+</script>

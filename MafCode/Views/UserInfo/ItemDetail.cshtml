@@ -1,0 +1,102 @@
+﻿@model MafCode.Models.UserInfo
+
+@{
+    ViewBag.Title = "ItemDetail";
+}
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+
+<div>
+    <div id="issMap"></div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemDetail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemDetail)
+        </dd>
+
+    </dl>
+</div>
+
+<style>
+    #issMap {
+        height: 250px;
+        width: 250px;
+        float: right;
+    }
+</style>
+
+
+<script> 
+            const mymap = L.map('issMap').setView([@ViewBag.Latitude ,@ViewBag.Longitude], 14);
+            const attribution =
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+           const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+           const tiles = L.tileLayer(tileUrl, { attribution });
+            tiles.addTo(mymap);
+
+            // Making a marker with a custom icon
+            const issIcon = L.icon({
+                iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+                iconSize: [50, 32],
+                iconAnchor: [25, 16]
+            });
+            let marker = L.marker([@ViewBag.Latitude ,@ViewBag.Longitude]).addTo(mymap);
+     
+</script>

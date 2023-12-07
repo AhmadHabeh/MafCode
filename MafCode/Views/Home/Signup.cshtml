@@ -1,0 +1,110 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/Content/loginstyle.css" />
+    <title>Sign in & Sign up Form</title>
+</head>
+<body>
+
+    @Html.Hidden("RedirectTo", Url.Action("Details", "UserInfo"));
+    <div class="signin-signup">
+        <form action="#" class="sign-in-form">
+            <br><br>
+            <h2 class="title">Sign Up</h2>
+            <div class="input-field">
+                <i class="fas fa-user"></i>
+                <input type="text" id="FirstName" placeholder="FirstName" />
+            </div>
+            <div class="input-field">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="LastName" id="LastName" />
+            </div>
+            <div class="input-field">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Username" id="Username" />
+            </div>
+            <div class="input-field">
+                <i class="fas fa-envelope"></i>
+                <input type="email"placeholder="Email" id="Email" />
+            </div>
+            <div class="input-field">
+                <i class="fas fa-phone"></i>
+                <input type="tel" placeholder="Phone Number" id="PhoneNumber" />
+            </div>
+            <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" id="Password" />
+            </div>
+
+
+
+            <input value="SignUp" type="button" onclick="MyFunction();" class="btn solid" />
+            <p class="social-text">Or Sign up with social platforms</p>
+            <div class="social-media">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </form>
+
+    </div>
+
+    <br><br><hr>
+    <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3 style="font-size:20px">Have Account?</h3>
+                <a href="@Url.Action("Login","Home")" style="color:chartreuse;font-family:Copperplate Gothic Light; font-size:20px">Signin</a>
+            </div>
+            <img src="img/log.svg" class="image" alt="" />
+        </div>
+    </div>
+
+
+    <script src="app.js"></script>
+    <script>
+                function MyFunction() {
+                var Username = $('#Username').val();
+                var data = {
+
+                    Username: Username,
+                    FirstName: $('#FirstName').val(),
+                    LastName: $('#LastName').val(),
+                    PhoneNumber: $('#PhoneNumber').val(),
+                    Email: $('#Email').val(),
+                    Password: $('#Password').val()
+
+                };
+                $.post('@Url.Action("SignUp", "Home")', data, function (data) {
+                    if (data === 'False') { alert('UserName or Email is already used!') }
+                    else {
+                        
+                        $.get('@Url.Action("UserID", "Home")' + '?username=' + Username, function (data)
+                        {
+                            var url = $("#RedirectTo").val();
+                            console.log(url);
+                            console.log(url + '/' + data);
+                            location.href = url+'/'+data;
+                        })
+
+                    }
+            console.log(data);
+        });
+    }
+    </script>
+</body>
+</html>

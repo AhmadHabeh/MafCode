@@ -1,0 +1,160 @@
+﻿@model MafCode.Models.UserInfo
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+
+
+<div id="divBtn" style="float:right">
+    <i class="fas fa-envelope"></i>
+    @Html.ActionLink("Add Items", "AddItem", new { id = Model.UniqueID }, new { target = "_blank", @Class = "icon-camera-retro" })
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("RedirectTo", Url.Action("Details", new { id = Model.UniqueID }));
+    <div class="form-horizontal">
+
+        <h4>UserInfo</h4>
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div id="issMap"></div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input onclick="MyFunction();"
+                       value="Save Changes"
+                       type="button"
+                       class="btn btn-primary" />
+                @*<a href="@Url.Action("Details","UserInfo")" style="color:chartreuse;font-family:Copperplate Gothic Light; font-size:20px">Save Changes</a>*@
+
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+
+        @Html.ActionLink("Add Items", "AddItem", new { id = Model.UniqueID }, new { target = "_blank" })
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<style>
+    #issMap {
+        height: 250px;
+        width: 250px;
+        /*float: right;*/
+    }
+
+    #divBtn a {
+    }
+</style>
+
+<script>
+            var lat = '@ViewBag.Latitude';
+            var lang = '@ViewBag.Longitude'
+
+            if (lat === '') lat = 31.898175;
+            if (lang === '') lang = 35.906004;
+
+            const mymap = L.map('issMap').setView([lat,lang], 14);
+            const attribution =
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+            const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            const tiles = L.tileLayer(tileUrl, { attribution });
+            tiles.addTo(mymap);
+
+            // Making a marker with a custom icon
+            const issIcon = L.icon({
+                iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+                iconSize: [50, 32],
+                iconAnchor: [25, 16]
+            });
+            let marker = null;
+            if ('@ViewBag.Latitude' !='' && '@ViewBag.Longitude'!='')
+                marker= L.marker(['@ViewBag.Latitude', '@ViewBag.Longitude']).addTo(mymap);
+
+
+    function onMapClick(e) {
+                if(marker !=null)
+                marker.remove();
+                marker = L.marker([e.latlng.lat,e.latlng.lng]).addTo(mymap);
+            }
+            mymap.on('click', onMapClick);
+
+
+    function MyFunction() {
+        var data = {
+
+                Username: $('#Username').val(),
+                FirstName: $('#FirstName').val(),
+                LastName: $('#LastName').val(),
+                PhoneNumber: $('#PhoneNumber').val(),
+                Email: $('#Email').val(),
+            mapDetails: { Latitude: marker._latlng.lat, Longitude: marker._latlng.lng}
+
+        };
+        $.post('@Url.Action("Edit", "UserInfo")', data, function (data) {
+            var url = $("#RedirectTo").val();
+            console.log(url);
+            location.href = url;
+        });
+    }
+</script>

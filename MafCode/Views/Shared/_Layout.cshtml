@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MafCode</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-navbar navbar-dark bg-dark">
+        <div class="container">
+            <img src="~/Images/logoo1.png" alt="Norway" style="width:9%" class="w3-hover-opacity">
+
+            <a class="navbar-brand" asp-area="" href="~/Views/Home/Index.cshtml"></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @*d-sm-inline-flex flex-sm-row-reverse justify-content-between*@
+            <div class="navbar-collapse collapse d-flex align-items-center justify-content-between">
+                @*flex-grow-1*@
+                <ul class="navbar-nav d-sm-inline-flex flex-sm-row">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="@Url.Action("Index", "Home")">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="@Url.Action("About", "Home")">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="@Url.Action("HowItWorks", "Home")">How It Works</a>
+                    </li>
+
+                    @if (System.Web.HttpContext.Current.Session["Username"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="@Url.Action("Login", "Home")">login</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" style="color:red;" href="@Url.Action("Logout", "Home")">Logout</a>
+                        </li>
+                    }
+                </ul>
+                @if (Session["ID"] != null && !string.IsNullOrEmpty((string)Session["ID"]))
+                {
+                    <div>
+                        @Html.ActionLink("Profile", "Details", "UserInfo",new { id = (string)Session["ID"] } , new { @class = "btn btn-light" })
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - MafCode - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/Scripts/umd/siite.js" asp-append-version="true"></script>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

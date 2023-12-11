@@ -53,7 +53,7 @@ Setting up your MafCode is a breeze – just generate your personalized QR code 
 **Download QR Code:**
      Optionally, you can download the generated QR code for offline use.
 
-To navigate back to user informationclick on "Profile" in the top right corner
+To navigate back to user information,click on "Profile" in the top right corner
 
 ![image](https://github.com/AhmadHabeh/MafCode/assets/123034491/a6e3f58b-e903-4c00-b632-36f5bd7a24a6)
 

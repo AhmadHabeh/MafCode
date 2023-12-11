@@ -23,6 +23,44 @@ Setting up your MafCode is a breeze – just generate your personalized QR code 
    - Click on the "Sign Up" or "Create Account" button on the homepage.
    - Fill out the required information, including your first name, last name, username, email address, phone number, and a secure password.
 ![image](https://github.com/AhmadHabeh/MafCode/assets/123034491/3fd9daff-49b7-4bf7-8936-9d3f3f8c1b2e)
+ **Explore Your Dashboard:**
+   - Upon logging in, you'll be directed to your personalized dashboard.
+   - Here, you can view all the information you provided during sign-up.
+![image](https://github.com/AhmadHabeh/MafCode/assets/123034491/005e41da-7d14-4eed-84fd-6f2d02d146c1)
+
+
+ **Edit Your Information:**
+   - Look for the "Edit" button on your dashboard.
+   - Clicking this button allows you to make changes to your personal details and update your location.
+
+ **Choose Your Location:**
+   - Within the edit page, find the location section.
+   - Update your current location, ensuring your lost items can be returned to the right place.
+
+
+![image](https://github.com/AhmadHabeh/MafCode/assets/123034491/91c2dc13-c2af-471d-9900-75d8c3a56e9a)
+
+**Add Items:**
+    - Click on "Add Items" at the top right of the page.
+    - Enter the Item Name and Description for the item you want to add.
+
+**Generate QR Code:**
+    - After adding the item details, a link to "Generate QR Code" will appear on the right.
+    - Click this link to create a unique QR code for the added item.
+
+![image](https://github.com/AhmadHabeh/MafCode/assets/123034491/19c61f71-8d8e-409f-b587-eb75d638801f)
+
+**Download QR Code:**
+     Optionally, you can download the generated QR code for offline use.
+
+To navigate back to user informationclick on "Profile" in the top right corner
+
+![image](https://github.com/AhmadHabeh/MafCode/assets/123034491/a6e3f58b-e903-4c00-b632-36f5bd7a24a6)
+
+
+
+
+
 
 
 
